@@ -5,6 +5,7 @@ import torch
 from io import BytesIO
 import base64
 from PIL import Image
+import os
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -43,5 +44,6 @@ def generate_image():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    port = os.environ.get("PORT", 5000)  # Use the environment variable for port, default to 5000
+    app.run(debug=True, host='0.0.0.0', port=port)
